@@ -22,16 +22,16 @@
     <div class="container">
       <table class="table">
         <thead class="thead-dark">
-          <tr>
+          <tr align="center">
             <th>ID</th>
             <th>Name</th>
-            <th></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="category : ${categories}">
+          <tr th:each="category : ${categories}" align="center">
             <td th:text="${category.id}"></td>        
-            <td th:text="${category.name}"></td>           
+            <td th:text="${category.name}"></td>    
             <td align="center">
               <a th:href="@{/categories/{id}/(id=${category.id})}" class="btn btn-success"><i class="fas fa-eye"></i></a>
               <a th:href="@{/categories/edit/{id}/(id=${category.id})}" class="btn btn-warning"><i class="fas fa-edit"></i></a>

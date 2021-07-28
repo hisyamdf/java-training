@@ -23,7 +23,6 @@
       <table class="table">
         <thead class="thead-dark">
           <tr align="center">
-            <th>ID</th>
             <th>Code</th>
             <th>Name</th>
             <th>Price</th>
@@ -33,7 +32,6 @@
         </thead>
         <tbody>
           <tr th:each="product : ${products}" align="center">
-            <td th:text="${product.id}"></td>
             <td th:text="${product.code}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.price}"></td>

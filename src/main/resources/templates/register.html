@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1, shrink-to-fit=no"
+     />
+     <title>Demo Spring MVC</title>
+     <link
+       rel="stylesheet"
+       href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css"
+     />
+     <link
+       rel="stylesheet"
+       href="/webjars/font-awesome/5.15.1/css/all.min.css"
+     />
+     <link rel="stylesheet" th:src="@{/css/mystyle.css}" />
+   </head>
+   <body>
+     <div th:replace="fragment/header::header"></div>
+     <div class="container">
+       <h3>Register</h3>
+       <form th:object="${user}" method="post" th:action="@{/users/register}">
+         <div class="form-group">
+           <label>Email</label>
+           <input type="text" th:field="*{email}" class="form-control" />
+         </div>
+         <div class="form-group">
+           <label>Password</label>
+           <input type="password" th:field="*{password}" class="form-control" />
+         </div>        
+         <p><input type="submit" value="Register" class="btn btn-primary" /></p>
+       </form>
+     </div>
+     <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+     <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+     <script th:src="@{/js/myscript.js}"></script>
+   </body>
+ </html>

@@ -2,6 +2,8 @@ package com.training.controllers;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import com.training.data.entity.Category;
 import com.training.data.repos.CategoryRepo;
 import com.training.dto.CategoryData;
@@ -21,6 +23,9 @@ public class CategoryController {
     @Autowired
     private CategoryRepo categoryRepo;
 
+    @Autowired
+    private HttpSession session;
+
     @GetMapping
     public String main(Model model) {
         Iterable<Category> categories = categoryRepo.findAll();
@@ -28,7 +33,7 @@ public class CategoryController {
         return "categories";
     }
 
-    @GetMapping("/categories/{id}")
+    @GetMapping("/{id}")
     public String detail(Model model, @PathVariable("id") Long id) {
         Optional<Category> categories = categoryRepo.findById(id);
         if (categories.isPresent()) {
@@ -37,28 +42,40 @@ public class CategoryController {
         return "detailcategory";
     }
 
-    @GetMapping("/categories/add")
+    @GetMapping("/add")
     public String add(Model model) {
+        if(session.getAttribute("CURRENT_USER")==null){
+            return "redirect:/users/login";
+        }
         model.addAttribute("categories", new CategoryData());
         return "inputcategory";
     }
 
-    @PostMapping("/categories/save")
+    @PostMapping("/save")
     public String save(CategoryData categoryData) {
+        if(session.getAttribute("CURRENT_USER")==null){
+            return "redirect:/users/login";
+        }
         Category categories = new Category();
         categories.setName(categoryData.getName());
         categoryRepo.save(categories);
         return "redirect:/categories";
     }
 
-    @GetMapping("/categories/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable("id") Long id) {
+        if(session.getAttribute("CURRENT_USER")==null){
+            return "redirect:/users/login";
+        }
         categoryRepo.deleteById(id);
         return "redirect:/categories";
     }
 
-    @GetMapping("/categories/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") Long id) {
+        if(session.getAttribute("CURRENT_USER")==null){
+            return "redirect:/users/login";
+        }
         Optional<Category> categories = categoryRepo.findById(id);
         if(categories.isPresent()) {
             model.addAttribute("categories", categories);
@@ -67,8 +84,11 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @PostMapping("/categories/update")
+    @PostMapping("/update")
     public String update(Category categories) {
+        if(session.getAttribute("CURRENT_USER")==null){
+            return "redirect:/users/login";
+        }
         categoryRepo.save(categories);
         return "redirect:/categories";
     }

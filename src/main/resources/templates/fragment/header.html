@@ -35,10 +35,9 @@
                       </div>
                     </li>
                   </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                  </form>
+                  <span th:if=${session.CURRENT_USER}>
+                    <a class="btn btn-danger" th:href="@{/users/logout}"><i class="fas fa-sign-out-alt"></i> <span th:text="${session.CURRENT_USER}"></span></a>
+                </span>
                 </div>
               </nav>
             </div>

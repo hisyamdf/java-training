@@ -21,6 +21,14 @@
     <div th:replace="fragment/header::header"></div>
     <div class="container">
       <h3>Input New Product</h3>
+      <span th:if=${ERROR}>
+        <div class="alert alert-danger">
+          <strong>Error(s)</strong>
+          <ul>
+            <li th:each="message : ${ERROR.messages}" th:text="${message}"></li>
+          </ul>
+        </div>
+      </span>
       <form th:object="${product}" method="post" th:action="@{/product/save}">
         <div class="form-group">
           <label>Code</label>
